@@ -19,13 +19,8 @@ import com.onlinetutorialspoint.model.Person;
 @Transactional
 public interface PersonDAO extends JpaRepository<Person, Long >{
 
-	public static final EntityManagerFactory entityManagerFactory = null;
 	
 	boolean findById(boolean b);
-	
-	default EntityManagerFactory getEntityManagerFactory() {
-		return entityManagerFactory;
-	}
 	
 }
 
