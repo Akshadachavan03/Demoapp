@@ -3,6 +3,7 @@ package com.onlinetutorialspoint.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.onlinetutorialspoint.model.User;
@@ -12,7 +13,7 @@ import com.onlinetutorialspoint.model.User;
 public interface UserDAO extends JpaRepository<User, Long >{
 
 	
-	boolean findById(boolean b);
+	User findByEmailId(@Param("email") String email);
 	
 }
 

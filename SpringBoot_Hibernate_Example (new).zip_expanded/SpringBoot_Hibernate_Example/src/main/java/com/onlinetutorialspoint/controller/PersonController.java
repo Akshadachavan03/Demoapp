@@ -1,63 +1,99 @@
 package com.onlinetutorialspoint.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-//import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.onlinetutorialspoint.dao.PersonRepo;
-//import com.onlinetutorialspoint.dao.PersonDAO;
+
+import com.onlinetutorialspoint.constents.CafeConstant;
 import com.onlinetutorialspoint.model.Person;
-import com.onlinetutorialspoint.service.PeersonServiceImpl;
+import com.onlinetutorialspoint.model.User;
 import com.onlinetutorialspoint.service.PersonService;
-
-
+import com.onlinetutorialspoint.service.UserService;
+import com.onlinetutorialspoint.utils.CafeUtils;
 
 @RestController
-public class PersonController{
-	
-	@Autowired
-	PeersonServiceImpl personserviceimpl; 
-	
 
-    
-		
-		@GetMapping("/get")
-		public List<Person> getallPerson(){
-			return personserviceimpl.getallPerson() ;
-			
-		}
+public class PersonController {
 	
+	UserService userService;
+	PersonService personService;
+	User user;
+	
+	@GetMapping("/person")
+	public List<Person> getallPerson()
+	{
+		return personService.getallPerson();
+	}
 
-		public Person getPersonById(@PathVariable String Id) {
-			return personserviceimpl.getPersonById(Long.parseLong(Id));
-			
-		}
-	
-	
-		public boolean saveOrUpdatePerson(Person person) {
-			return false;
-		}
+	@GetMapping("/person/{personId}")
+	public Person getPersonById(@PathVariable Long id) {
 		
-		public boolean deletePerson(Long id) {
-			return false;
-		}
+		return null;
+		//return personService.getPersonById(Long.parseLong(id));
+		
+	}
+	
+	@PostMapping("/person")
+	public boolean saveOrUpdatePerson(@RequestBody Person person) {
+		
+		
+		return personService.saveOrUpdatePerson(person);
+		
+	}
+	
+	public boolean deletePerson(Long id) {
+		return false;
+		
+	}
+	
+	
+	/*@Override
+	@PostMapping(path = "/signup")
+	public ResponseEntity<String> signup(Map<String, String> requestMap) {
+		
+		return userService.signup(requestMap.get());
+	}*/
+	/*@PostMapping(path = "/signup")
+	public User getUserFromMap(Map<String, String> requestMap) {
+		return user;
+		
+		
+	}*/
+	
+	
+	
 }
+	/*@Autowired
+	UserService userservice;
+	
+	@Override
+	@RequestMapping(path ="/user")
+	public ResponseEntity<String> signup(Map<String, String> requestMap) {
+		
+		try {
+			return userservice.signup(requestMap);
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return CafeUtils.getResponseEntity(CafeConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+	
+	@PostMapping(path = "/signup")
+	public ResponseEntity<String>  signup(@RequestBody(required = true) Map<String,String> requestMap) {
+		return null;
+	}
+}
+
 
 /*@Controller
 @RequestMapping(value = "/person")

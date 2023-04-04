@@ -5,7 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+@NamedQuery(name = "User.findByEmailId", query = "select u from User u where u.email=:email")
+
+
+
 
 @Entity
 @Table(name = "users")
@@ -18,14 +24,49 @@ public class User {
 	@Column(name="firstName")
 	private String firstName;
 	
-	@Column(name="lastName")
-	private String lastName;
+	@Column(name="email")
+	private String email;
 	
-	@Column
-	private Long mobileNo;
+	@Column(name="mobileNo")
+	private String mobileNo;
 	
-	@Column
+	@Column(name="password")
 	private String password;
+
+	@Column(name="status")
+	private String status;
+	
+	@Column(name="role")
+	private String role;
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 
 	public String getFirstName() {
@@ -38,23 +79,23 @@ public class User {
 	}
 
 
-	public String getLastName() {
-		return lastName;
+	public String getemail() {
+		return email;
 	}
 
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setemail(String email) {
+		this.email = email;
 	}
 
 
-	public Long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
 
-	public void setMobileNo(Long mobileNo) {
-		this.mobileNo = mobileNo;
+	public void setMobileNo(String MobileNo) {
+		this.mobileNo = MobileNo;
 	}
 
 
@@ -66,6 +107,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 	
 	public User() {
 		super();

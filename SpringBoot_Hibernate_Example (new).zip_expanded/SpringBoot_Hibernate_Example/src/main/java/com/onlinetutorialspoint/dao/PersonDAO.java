@@ -1,6 +1,7 @@
 package com.onlinetutorialspoint.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,8 +20,11 @@ import com.onlinetutorialspoint.model.Person;
 @Transactional
 public interface PersonDAO extends JpaRepository<Person, Long >{
 
-	
 	boolean findById(boolean b);
+
+	
+	
+	
 	
 }
 
