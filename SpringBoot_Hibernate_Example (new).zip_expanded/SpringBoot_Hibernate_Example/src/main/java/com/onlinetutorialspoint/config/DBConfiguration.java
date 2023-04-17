@@ -52,26 +52,25 @@ public class DBConfiguration {
 	}
 
 	
-	  @Bean
-	  public LocalSessionFactoryBean sessionFactory() {
-	  LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-	  sessionFactory.setDataSource(dataSource());
-	  sessionFactory.setPackagesToScan(PACKAGES_TO_SCAN); Properties
-	  hibernateProperties = new Properties();
-	  hibernateProperties.put("hibernate.dialect", DIALECT);
-	  hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
-	  hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
-	  sessionFactory.setHibernateProperties(hibernateProperties);
-	  
-	  return sessionFactory; }
-	 
-
-	
-	  @Bean
-	  public HibernateTransactionManager transactionManager() {
-	  HibernateTransactionManager transactionManager = new
-	  HibernateTransactionManager();
-	  transactionManager.setSessionFactory(sessionFactory().getObject()); return
-	  transactionManager; }
-	 
+	/*
+	 * @Bean public LocalSessionFactoryBean sessionFactory() {
+	 * LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+	 * sessionFactory.setDataSource(dataSource());
+	 * sessionFactory.setPackagesToScan(PACKAGES_TO_SCAN); Properties
+	 * hibernateProperties = new Properties();
+	 * hibernateProperties.put("hibernate.dialect", DIALECT);
+	 * hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
+	 * hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
+	 * sessionFactory.setHibernateProperties(hibernateProperties);
+	 * 
+	 * return sessionFactory; }
+	 * 
+	 * 
+	 * 
+	 * @Bean public HibernateTransactionManager transactionManager() {
+	 * HibernateTransactionManager transactionManager = new
+	 * HibernateTransactionManager();
+	 * transactionManager.setSessionFactory(sessionFactory().getObject()); return
+	 * transactionManager; }
+	 */
 }

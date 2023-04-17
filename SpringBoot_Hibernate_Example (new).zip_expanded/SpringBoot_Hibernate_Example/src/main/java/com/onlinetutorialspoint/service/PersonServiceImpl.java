@@ -12,8 +12,8 @@ import com.onlinetutorialspoint.dao.PersonDAO;
 import com.onlinetutorialspoint.model.Person;
 
 @Service
-public class PeersonServiceImpl implements PersonService {
-		
+public class PersonServiceImpl implements PersonService {
+	
 		@Autowired
 		PersonDAO persondao;
 		
