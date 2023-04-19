@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService{
 
 	
 	private boolean validateSignUpMap(Map<String, String> requestMap) {
-		if(requestMap.containsKey("name") && requestMap.containsKey("mobileNo") && requestMap.containsKey("email") && requestMap.containsKey("password"))
+		if(requestMap.containsKey("name") && requestMap.containsKey("mobileNo") 
+				&& requestMap.containsKey("email") && requestMap.containsKey("password"))
 		{
 			return true;
 		}
@@ -84,5 +85,12 @@ public class UserServiceImpl implements UserService{
 		
 		//return null;
 		
+	}
+
+
+	@Override
+	public ResponseEntity<String> login(Map<String, String> requestMap) {
+		
+		return null;
 	}
 }

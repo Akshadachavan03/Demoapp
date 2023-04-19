@@ -31,15 +31,15 @@ public class PersonController {
 	 * @Autowired UserService userService;
 	 */
 	
-	@Autowired(required=true)
-	PersonService personService;
-	
-	//User user;
-	
-	 @GetMapping("/person") 
-	 public List<Person> getallPerson() { 
-		 return personService.getallPerson();
-	 }
+//	@Autowired(required=true)
+//	PersonService personService;
+//	
+//	//User user;
+//	
+//	 @GetMapping("/person") 
+//	 public List<Person> getallPerson() { 
+//		 return personService.getallPerson();
+//	 }
 			  
 			  
 	
