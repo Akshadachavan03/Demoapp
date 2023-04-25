@@ -17,15 +17,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.onlinetutorialspoint.constents.CafeConstant;
+import com.onlinetutorialspoint.dao.UserDAO;
 import com.onlinetutorialspoint.model.Person;
 import com.onlinetutorialspoint.model.User;
 import com.onlinetutorialspoint.service.PersonService;
 import com.onlinetutorialspoint.service.UserService;
+import com.onlinetutorialspoint.serviceImpl.UserServiceImpl;
 import com.onlinetutorialspoint.utils.CafeUtils;
 
 @RestController
 @RequestMapping(value = "/user")
 public class PersonController {
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	UserDAO userDao;
+	
+	
+	@PostMapping(path = "/signup")
+	 public ResponseEntity<String> signup(@RequestBody(required = true) Map<String, String> requestMap) {
+		 try { return userService.signup(requestMap); }catch (Exception ex) {
+			  ex.printStackTrace(); } return
+			  CafeUtils.getResponseEntity(CafeConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> login(User UserData) {
+		User user= userDao.findByEmailId(UserData.getEmail());
+		User user1= userDao.findByEmailId(UserData.getPassword());
+		if(user.getPassword().equals(user1.getPassword()))
+		return ResponseEntity.ok(user);
+	
+		return (ResponseEntity<?>) ResponseEntity.internalServerError();
+	}
+}
+
 	
 	/*
 	 * @Autowired UserService userService;
@@ -80,7 +108,7 @@ public class PersonController {
 	 * INTERNAL_SERVER_ERROR); }
 	 */
 	
-}
+
 
 
 /*@Controller

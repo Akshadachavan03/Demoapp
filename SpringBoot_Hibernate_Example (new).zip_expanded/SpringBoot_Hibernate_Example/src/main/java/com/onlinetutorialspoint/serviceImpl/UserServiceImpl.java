@@ -88,9 +88,16 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	@Override
-	public ResponseEntity<String> login(Map<String, String> requestMap) {
-		
-		return null;
-	}
+	
+
+
+//	@Override
+//	public ResponseEntity<User> login(Map<String, String> requestMap) {
+//		
+//		User user= userDao.findByEmailId(User.get);
+//		if(user.getPassword().equals(user.getPassword()))
+//		return ResponseEntity.ok(user);
+//		
+//		return (ResponseEntity<User>) ResponseEntity.internalServerError();
+//	}
 }

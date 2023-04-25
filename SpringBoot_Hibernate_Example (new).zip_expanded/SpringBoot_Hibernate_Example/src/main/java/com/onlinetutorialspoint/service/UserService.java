@@ -13,7 +13,9 @@ public interface UserService {
 		ResponseEntity<String> signup(Map<String, String> requestMap);
 		public User getUserFromMap(Map<String, String> requestMap);
 		
-		ResponseEntity<String> login(Map<String, String> requestMap);
+		//public ResponseEntity<?> login(User UserData); 
+		
+		
 		
 
 }
