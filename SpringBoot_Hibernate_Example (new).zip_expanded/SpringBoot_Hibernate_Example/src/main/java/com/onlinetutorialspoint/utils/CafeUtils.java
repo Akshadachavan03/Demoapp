@@ -3,6 +3,8 @@ package com.onlinetutorialspoint.utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.onlinetutorialspoint.model.User;
+
 public class CafeUtils {
 
 	

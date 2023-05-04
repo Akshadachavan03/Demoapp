@@ -47,11 +47,15 @@
     <artifactId>postgresql</artifactId>
     <scope>runtime</scope>
 </dependency>
-
 <dependency>
     <groupId>javax.xml.bind</groupId>
     <artifactId>jaxb-api</artifactId>
 </dependency>
+		<dependency>
+			<groupId>com.example.login</groupId>
+			<artifactId>Login</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

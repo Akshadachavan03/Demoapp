@@ -2,12 +2,14 @@ package com.onlinetutorialspoint.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.onlinetutorialspoint.constents.CafeConstant;
+import com.onlinetutorialspoint.dao.Login;
 import com.onlinetutorialspoint.dao.UserDAO;
 import com.onlinetutorialspoint.model.Person;
 import com.onlinetutorialspoint.model.User;
+import com.onlinetutorialspoint.service.LoginService;
 import com.onlinetutorialspoint.service.PersonService;
 import com.onlinetutorialspoint.service.UserService;
 import com.onlinetutorialspoint.serviceImpl.UserServiceImpl;
@@ -27,7 +31,7 @@ import com.onlinetutorialspoint.utils.CafeUtils;
 
 @RestController
 @RequestMapping(value = "/user")
-public class PersonController {
+public class PersonController{
 	
 	@Autowired
 	UserService userService;
@@ -35,121 +39,44 @@ public class PersonController {
 	@Autowired
 	UserDAO userDao;
 	
+	@Autowired
+	Login login;
+
+	@GetMapping("/home")
+	public String home() {
+		return "home";
+		
+	}
 	
 	@PostMapping(path = "/signup")
 	 public ResponseEntity<String> signup(@RequestBody(required = true) Map<String, String> requestMap) {
-		 try { return userService.signup(requestMap); }catch (Exception ex) {
+		 try { 
+			 return userService.signup(requestMap); }
+		 catch (Exception ex) {
+			  ex.printStackTrace();  
+		 }
+			  return CafeUtils.getResponseEntity(CafeConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+	
+	@PostMapping(path = "/login")
+	 public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap ){
+		
+		try { return userService.login(requestMap); }catch (Exception ex) {
 			  ex.printStackTrace(); } return
 			  CafeUtils.getResponseEntity(CafeConstant.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR); 
-	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<?> login(User UserData) {
-		User user= userDao.findByEmailId(UserData.getEmail());
-		User user1= userDao.findByEmailId(UserData.getPassword());
-		if(user.getPassword().equals(user1.getPassword()))
-		return ResponseEntity.ok(user);
-	
-		return (ResponseEntity<?>) ResponseEntity.internalServerError();
-	}
+			
 }
 
 	
-	/*
-	 * @Autowired UserService userService;
-	 */
-	
-//	@Autowired(required=true)
-//	PersonService personService;
-//	
-//	//User user;
-//	
-//	 @GetMapping("/person") 
-//	 public List<Person> getallPerson() { 
-//		 return personService.getallPerson();
-//	 }
-			  
-			  
-	
-	/*
-	 * @GetMapping("/person") public List<Person> getallPerson() { return
-	 * personService.getallPerson(); }
-	 * 
-	 * @GetMapping("/person/{personId}") public Person getPersonById(@PathVariable
-	 * Long id) {
-	 * 
-	 * return null; //return personService.getPersonById(Long.parseLong(id));
-	 * 
-	 * }
-	 * 
-	 * @PostMapping("/person") public boolean saveOrUpdatePerson(@RequestBody Person
-	 * person) {
-	 * 
-	 * 
-	 * return personService.saveOrUpdatePerson(person);
-	 * 
-	 * }
-	 * 
-	 * public boolean deletePerson(Long id) { return false;
-	 * 
-	 * }
-	 */
+	@GetMapping("login/{email}/{password}")
+	public int UserLogin(@PathVariable("email") String email1, @PathVariable("password") String password1) {
 		
-	
-	/*
-	 * @RequestMapping(value = "/signup")
-	 * 
-	 * @ResponseBody public ResponseEntity<String> signup(Map<String, String>
-	 * requestMap) {
-	 * 
-	 * try { return userService.signup(requestMap); }catch (Exception ex) {
-	 * ex.printStackTrace(); } return
-	 * CafeUtils.getResponseEntity(CafeConstant.SOMETHING_WENT_WRONG,HttpStatus.
-	 * INTERNAL_SERVER_ERROR); }
-	 */
-	
-
-
-
-/*@Controller
-@RequestMapping(value = "/person")
-public class PersonController {
-	@Autowired
-	private PersonDAO personDao;
-
-	@RequestMapping(value = "/delete")
-	@ResponseBody
-	public String delete(long id) {
-		try {
-			Person person = new Person();
-			person.setId(id);
-			personDao.delete(person);
-		} catch (Exception ex) {
-			return ex.getMessage();
+		int flag = login.loginValidation(email1, password1);
+		if(flag == 0) {
+			return 0;
 		}
-		return "Person succesfully deleted!";
+		return flag;
+		
 	}
-
-	@RequestMapping(value = "/save")
-	@ResponseBody
-	public String create(String name, String city) {
-		try {
-			Person person = new Person();
-			person.setName(name);
-			person.setCity(city);
-			personDao.savePerson(person);
-		} catch (Exception ex) {
-			return ex.getMessage();
-		}
-		return "Person succesfully saved!";
-	}
-	@RequestMapping(value = "/allPersons")
-	@ResponseBody
-	public List<Person> getAllPersons() {
-		try {
-			return personDao.getAllPersons();
-		} catch (Exception ex) {
-			return null;
-		}
-	}
-}*/
+}

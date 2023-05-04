@@ -6,12 +6,15 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.onlinetutorialspoint.constents.CafeConstant;
+//import com.onlinetutorialspoint.dao.LoginDao;
 import com.onlinetutorialspoint.dao.UserDAO;
 
 import com.onlinetutorialspoint.model.User;
+import com.onlinetutorialspoint.service.CutomerUserDetailsService;
 import com.onlinetutorialspoint.service.UserService;
 import com.onlinetutorialspoint.utils.CafeUtils;
 
@@ -26,10 +29,14 @@ public class UserServiceImpl implements UserService{
 
 		@Autowired 
 		UserDAO userDao;
+		
+		@Autowired
+		CutomerUserDetailsService service;
+		
+
 	
-	
-	@Override
-	public ResponseEntity<String> signup(Map<String, String> requestMap) {
+	  @Override
+	  public ResponseEntity<String> signup(Map<String, String> requestMap) {
 		//log.info("Inside signup {}", requestMap);
 		try {
 		if(validateSignUpMap(requestMap)){
@@ -88,7 +95,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	
+	@Override
+	public ResponseEntity<String> login(Map<String, String> requestMap) {
+		//User user= userDao.findByEmailId(User.getEmail());
+		//if(CutomerUserDetailsService.getUserDetails().equals(user))
+		return null;
+		
+	}
+
+
+
+
+//	public boolean authenticate(String email, String password)
+//			throws Exception {
+//				return false;
+//		
+//	}
+//	
 
 
 //	@Override
